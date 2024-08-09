@@ -7,7 +7,7 @@ import 'column_maker.dart';
 import 'enums.dart';
 import 'sunmi_style.dart';
 
-///*SunmiPrinter*
+///SunmiPrinter
 ///
 ///This class is a core of our printer system.
 ///With this class you can print everything you like. If you want to print a text, qrcode, barcode, bold text, bigger text or the smallest text possible.
@@ -37,16 +37,16 @@ class SunmiPrinter {
   //A callable method to start the comunitation with the native code!
   static const MethodChannel _channel = MethodChannel('sunmi_printer_plus');
 
-  ///*bindingPrinter*
+  ///bindingPrinter
   ///
   ///This method will intializate the printer to start the whole print.
-  ///This method *Must* be executed before any other print and LCD command.
+  ///This method Must be executed before any other print and LCD command.
   static Future<bool?> bindingPrinter() async {
     final bool? status = await _channel.invokeMethod('BIND_PRINTER_SERVICE');
     return status;
   }
 
-  ///*unbindingPrinter*
+  ///unbindingPrinter
   ///
   ///This method is the opposite of [bindingPrinter].
   ///This will unbind or 'close' the connection with the printer, and must be the last execution.
@@ -56,15 +56,15 @@ class SunmiPrinter {
     return status;
   }
 
-  ///*initPrinter*
+  ///initPrinter
   ///
-  ///This method will reset the printer styles, font and everything that can change your text, but the method will *NOT* erase the buffer inside.
+  ///This method will reset the printer styles, font and everything that can change your text, but the method will NOT erase the buffer inside.
   static Future<bool?> initPrinter() async {
     final bool? status = await _channel.invokeMethod('INIT_PRINTER');
     return status;
   }
 
-  ///*getPrinterStatus*
+  ///getPrinterStatus
   ///
   ///This method will give you the status of the printer.
   ///Sometimes the printer can give you an error, so, try to print anyway.
@@ -102,7 +102,7 @@ class SunmiPrinter {
     }
   }
 
-  ///*getPrinterStatusWithVerbose*
+  ///getPrinterStatusWithVerbose
   ///
   ///Almos the same of  [getPrinterStatus] , but will return a text explaned
   ///@see the _printerStatus map!
@@ -112,7 +112,7 @@ class SunmiPrinter {
     return statusMsg;
   }
 
-  ///*getPrinterMode*
+  ///getPrinterMode
   ///
   ///This method will return what mode your printer to print in one way or other, like label mode or normal mode
   static Future<PrinterMode> getPrinterMode() async {
@@ -129,7 +129,7 @@ class SunmiPrinter {
     }
   }
 
-  ///*printText*
+  ///printText
   ///
   ///This method will print a simple text in your printer
   /// With the [SunmiStyle] you can put in one line, the size, alignment and bold
@@ -154,7 +154,7 @@ class SunmiPrinter {
     await initPrinter();
   }
 
-  ///*printRow*
+  ///printRow
   ///
   ///This method will print a row based in a list of [ColumnMaker].
   static Future<void> printRow(
@@ -170,7 +170,7 @@ class SunmiPrinter {
     await _channel.invokeMethod("PRINT_ROW", arguments);
   }
 
-  ///*printRawData*
+  ///printRawData
   ///
   ///With this method you can print a raw data, or a data that was made with some esc/pos package to simplify your calls
   ///*This is good if you have another print method that give you a [List<int>] that you can convert to esc/pos here
@@ -179,7 +179,7 @@ class SunmiPrinter {
     await _channel.invokeMethod("RAW_DATA", arguments);
   }
 
-  ///*printQRCode*
+  ///printQRCode
   ///
   ///With this method you can print a qrcode with some errorLevel and size.
   static Future<void> printQRCode(String data,
@@ -209,7 +209,7 @@ class SunmiPrinter {
     await _channel.invokeMethod("PRINT_QRCODE", arguments);
   }
 
-  ///*printBarCode*
+  ///printBarCode
   ///
   ///With this method you can print a barcode with any type discribed below or in the enum section
   static Future<void> printBarCode(String data,
@@ -274,7 +274,7 @@ class SunmiPrinter {
     await _channel.invokeMethod("PRINT_BARCODE", arguments);
   }
 
-  ///*lineWrap*
+  ///lineWrap
   ///
   ///With this method you can jump N lines in your pinter to make some spaces between sections
   static Future<void> lineWrap(int lines) async {
@@ -282,7 +282,7 @@ class SunmiPrinter {
     await _channel.invokeMethod("LINE_WRAP", arguments);
   }
 
-  ///*line*
+  ///line
   ///
   ///With this method you can draw a line to divide sections.
   static Future<void> line({
@@ -293,7 +293,7 @@ class SunmiPrinter {
     await printText(List.filled(len, ch[0]).join());
   }
 
-  ///*bold*
+  ///bold
   ///
   ///With this method you can bold a string very easy, just put this method before a [printText] and everyting after this mehod will be bold
 
@@ -303,7 +303,7 @@ class SunmiPrinter {
     await printRawData(Uint8List.fromList(boldOn));
   }
 
-  ///*resetBold*
+  ///resetBold
   ///
   ///This method will just reset the bold to a normal font weight
   static Future<void> resetBold() async {
@@ -312,7 +312,7 @@ class SunmiPrinter {
     await printRawData(Uint8List.fromList(boldOff));
   }
 
-  ///*setAlignment*
+  ///setAlignment
   ///
   ///With this method you can align your text in three ways, like LEFT, RIGHT and CENTER.
 
@@ -335,7 +335,7 @@ class SunmiPrinter {
     await _channel.invokeMethod("SET_ALIGNMENT", arguments);
   }
 
-  ///*printImage*
+  ///printImage
   ///
   ///With this method you can print an image in your printer.
   ///Just follow the examples that you can print even an image from web or an asset inside your project
@@ -345,7 +345,7 @@ class SunmiPrinter {
     await _channel.invokeMethod("PRINT_IMAGE", arguments);
   }
 
-  ///*startTransactionPrint*
+  ///startTransactionPrint
   ///
   ///If you want to print in one transaction, you can start the transaction, build your print commands without send to the buffer
   static Future<void> startTransactionPrint([bool clear = false]) async {
@@ -353,42 +353,42 @@ class SunmiPrinter {
     await _channel.invokeMethod("ENTER_PRINTER_BUFFER", arguments);
   }
 
-  ///*submitTransactionPrint*
+  ///submitTransactionPrint
   ///
   ///This method will submit your transaction to the bufffer
   static Future<void> submitTransactionPrint() async {
     await _channel.invokeMethod("COMMIT_PRINTER_BUFFER");
   }
 
-  ///*cut*
+  ///cut
   ///
   ///This method will  cut the paper
   static Future<void> cut() async {
     await _channel.invokeMethod("CUT_PAPER");
   }
 
-  ///*openDrawer*
+  ///openDrawer
   ///
   ///This method will open drawer
   static Future<void> openDrawer() async {
     await _channel.invokeMethod("OPEN_DRAWER");
   }
 
-  ///*drawerStatus*
+  ///drawerStatus
   ///
   ///This method will  check the status of the drawer true/false (connect disconnect)
   static Future<bool> drawerStatus() async {
     return await _channel.invokeMethod("DRAWER_STATUS") ?? false;
   }
 
-  ///*drawerTimesOpen*
+  ///drawerTimesOpen
   ///
   ///This method will  check how many times the drawer was open
   static Future<int> drawerTimesOpen() async {
     return await _channel.invokeMethod("DRAWER_OPENED") ?? 0;
   }
 
-  ///*exitTransactionPrint*
+  ///exitTransactionPrint
   ///
   ///This method will close the transaction
 
@@ -397,7 +397,7 @@ class SunmiPrinter {
     await _channel.invokeMethod("EXIT_PRINTER_BUFFER", arguments);
   }
 
-  ///*setFontSize*
+  ///setFontSize
   ///
   ///This method will change the fontsize , between extra small and extra large.
   ///You can see the sizes below or in the enum file.
@@ -410,6 +410,12 @@ class SunmiPrinter {
         break;
       case SunmiFontSize.SM:
         _fontSize = 18;
+        break;
+      case SunmiFontSize.XM:
+        _fontSize = 20;
+        break;
+      case SunmiFontSize.XMD:
+        _fontSize = 22;
         break;
       case SunmiFontSize.MD:
         _fontSize = 24;
@@ -426,7 +432,7 @@ class SunmiPrinter {
     await _channel.invokeMethod("FONT_SIZE", arguments);
   }
 
-  ///*setCustomFontSize*
+  ///setCustomFontSize
   ///
   ///This method will allow you to put any font size integer and try the best fit for you
   static Future<void> setCustomFontSize(int _size) async {
@@ -434,7 +440,7 @@ class SunmiPrinter {
     await _channel.invokeMethod("FONT_SIZE", arguments);
   }
 
-  ///*resetFontSize*
+  ///resetFontSize
   ///
   ///This method will reset the font size to the medium (default) size
   static Future<void> resetFontSize() async {
@@ -442,7 +448,7 @@ class SunmiPrinter {
     await _channel.invokeMethod("FONT_SIZE", arguments);
   }
 
-  ///*paperSize*
+  ///paperSize
   ///
   /// Get the paper size , because they can change the printers between 56 and 80mm
   static Future<int> paperSize() async {
@@ -450,14 +456,14 @@ class SunmiPrinter {
     return _paperize[_size ?? 0];
   }
 
-  ///*serialNumber*
+  ///serialNumber
   ///
   /// Get the serial number
   static Future<String> serialNumber() async {
     return await _channel.invokeMethod("PRINTER_SERIAL_NUMBER");
   }
 
-  ///*printerVersion*
+  ///printerVersion
   ///
   /// Get the printer's version
   static Future<String> printerVersion() async {
