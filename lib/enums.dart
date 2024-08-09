@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 library enums;
 
-///*PrinterStatus*
+///PrinterStatus
 ///
 ///This enum will give you the status of the printer.
 ///Sometimes the status can be ERROR, but don't worry about this status, always try co print anyway!
@@ -22,7 +22,7 @@ enum PrinterStatus {
   EXCEPTION,
 }
 
-///*PrinterMode*
+///PrinterMode
 ///
 ///Enum to set printer mode
 enum PrinterMode {
@@ -32,7 +32,7 @@ enum PrinterMode {
   LABEL_MODE,
 }
 
-///*SunmiPrintAlign*
+///SunmiPrintAlign
 ///
 ///Enum to set printer aligntment
 enum SunmiPrintAlign {
@@ -41,7 +41,7 @@ enum SunmiPrintAlign {
   RIGHT,
 }
 
-///*SunmiQrcodeLevel*
+///SunmiQrcodeLevel
 ///
 //Enum to set a QRcode Level (Low to High)
 enum SunmiQrcodeLevel {
@@ -51,7 +51,7 @@ enum SunmiQrcodeLevel {
   LEVEL_H,
 }
 
-///*SunmiBarcodeType*
+///SunmiBarcodeType
 ///
 ///Enum to set Barcode Type
 enum SunmiBarcodeType {
@@ -66,7 +66,7 @@ enum SunmiBarcodeType {
   CODE128,
 }
 
-///*SunmiBarcodeTextPos*
+///SunmiBarcodeTextPos
 ///
 ///Enum to set how the thex will be printed in barcode
 enum SunmiBarcodeTextPos {
@@ -76,11 +76,13 @@ enum SunmiBarcodeTextPos {
   BOTH,
 }
 
-///*SunmiFontSize*
+///SunmiFontSize
 ///Enum to set font in the printer
 enum SunmiFontSize {
   XS,
   SM,
+  XM,
+  XMD,
   MD,
   LG,
   XL,
